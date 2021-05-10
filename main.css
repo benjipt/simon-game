@@ -2,24 +2,37 @@
 
 body {
     background-color: #073B4C;
+    /* height: 100%; */
     margin: 0 auto;
     text-align: center;
     color: ghostwhite;
 }
 
+.app {
+    display: flex;
+    flex-flow: column;
+}
+
+header {
+    margin: 0 auto;
+    flex: 1 1 auto;
+    /* border: thin solid ghostwhite; */
+    /* box-sizing: border-box; */
+}
+
 h1 {
-    margin: 1em auto;
     font-family: 'McLaren', cursive;
     font-size: 48px;
 }
 
-.game-container {
-    margin: 4em auto;
+.button-container {
+    margin: 0 auto;
     display: flex;
+    flex: 1 1 auto;
     align-content: flex-start;
     flex-direction: column;
     width: 100%;
-    height: 500px;
+    height: 550px;
     background-color: ghostwhite;
     overflow: hidden;
 }
@@ -48,3 +61,24 @@ h1 {
     background-color: #118AB2;
     transform-origin: top left;
 }
+
+
+/* @media (max-width: 380px) {
+
+} */
+
+/* @media (max-width: 500px) {
+
+} */
+
+/* @media (max-height: 700px) {
+    .button-container {
+        height: 380px;
+    }
+} */
+
+/* @media (max-height: 750px) {
+    .button-container {
+        height: 460px;
+    }
+} */
