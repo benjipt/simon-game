@@ -1,8 +1,8 @@
 body {
-    background-color: #FFD166;
+    background-color: #073B4C;
     margin: 0 auto;
     text-align: center;
-    
+    color: ghostwhite;
 }
 
 h1 {
@@ -13,8 +13,31 @@ h1 {
 
 .game-container {
     margin: 4em auto;
-    display: block;
+    display: flex;
+    align-content: flex-start;
+    flex-flow: row wrap;
     width: 100%;
     height: 500px;
-    background-color: #100C08;
+    background-color: ghostwhite;
+}
+
+.game-button {
+    width: 50%;
+    height: 50%;
+}
+
+#green {
+    background-color: #06D6A0;
+}
+
+#red {
+    background-color: #EF476F;
+}
+
+#yellow {
+    background-color: #FFD166;
+}
+
+#blue {
+    background-color: #118AB2;
 }
