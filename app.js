@@ -1,1 +1,25 @@
-console.log('Connected to the matrix');
+// console.log('Connected to the matrix');
+
+/*
+Project requirements: 
+https://git.generalassemb.ly/seir-4-19/student-resources/tree/main/5_project_files/project_1
+
+Notes:
+- For reference, how the analog version works: https://www.youtube.com/watch?v=1Yqj76Q4jJ4
+
+Potential Roadblocks:
+- Asynchronous programming has been a challenge for me in the past, but I'm confident that I can clear any hurdles needed here for this project.
+- Reproducing the shapes of the game and buttons could be a challenge.
+    - SVG or styled divs for this?
+- Obtaining sound samples.
+
+Stretch Goals:
+- Keep track of best round
+- Make it responsive
+    - Possibly re-design layout/feel of buttons for mobile versions or for all versions.
+- Have player choose difficulty level with expanded button options (can expand to more than 3)
+
+Feedback:
+- jquery logic does not transfer 100% to mobile
+- mobile version of might require different logic / event handlers.
+*/
