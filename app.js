@@ -128,10 +128,12 @@ const pressButton = button => {
 }
 
 const runSequence = () => {
+    let i = 1;
     for (let button of currentSequence) {
         setTimeout(() => {
             pressButton(button);
-        }, 800);
+        }, 700 * i);
+        i++;
     }
 }
 
