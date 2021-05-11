@@ -11,10 +11,33 @@
 */
 
 // COLOR ARRAYS - Index of 0 is default
-const green = [`#06D6A0`, `#53FFED`];
-const red = [`#EF476F`, `#FF94BC`];
-const yellow = [`#FFD166`, `#FFFFB3`];
-const blue = [`#118AB2`, `#5ED7FF`];
+// const green = [`#06D6A0`, `#53FFED`];
+// const red = [`#EF476F`, `#FF94BC`];
+// const yellow = [`#FFD166`, `#FFFFB3`];
+// const blue = [`#118AB2`, `#5ED7FF`];
+
+const colors = [
+    {
+        color: `green`,
+        staticColor: `#06D6A0`,
+        dynamicColor: `#53FFED`
+    },
+    {
+        color: `red`,
+        staticColor: `#EF476F`,
+        dynamicColor: `#FF94BC`
+    },
+    {
+        color: `yellow`,
+        staticColor: `#FFD166`,
+        dynamicColor: `#FFFFB3`
+    },
+    {
+        color: `blue`,
+        staticColor: `#118AB2`,
+        dynamicColor: `#5ED7FF`
+    }
+];
 
 const playSound = color => {
     const tone = new Audio(`sounds/${color}-button.mp3`);
@@ -72,54 +95,21 @@ const extendCurrentSequence = button => {
     currentSequence.push(button);
 };
 
-// const runButtonUX = button => {
-//     const color = button.id;
-//     button.style.backgroundColor = `${color[1]}`;
-//     playSound(color);
-//     setTimeout(() => {
-//         button.style.backgroundColor = `${color[0]}`
-//     }, 500);
-// }
-
-const pressButton = button => {
-    switch (button.id) {
-        case 'green':
-            button.style.backgroundColor = green[1];
-            playSound(button.id);
-            setTimeout(() => {
-                button.style.backgroundColor = green[0];
-            }, 500);
-            break;
-        case 'red':
-            button.style.backgroundColor = red[1];
-            playSound(button.id);
-            setTimeout(() => {
-                button.style.backgroundColor = red[0];
-            }, 500);
-            break;
-        case 'yellow':
-            button.style.backgroundColor = yellow[1];
-            playSound(button.id);
-            setTimeout(() => {
-                button.style.backgroundColor = yellow[0];
-            }, 500);
-            break;
-        case 'blue':
-            button.style.backgroundColor = blue[1];
-            playSound(button.id);
-            setTimeout(() => {
-                button.style.backgroundColor = blue[0];
-            }, 500);
-            break;
-    }
+const playButton = button => {
+    const color = colors.find( ({ color }) => color === button.id);
+    button.style.backgroundColor = `${color.dynamicColor}`;
+    playSound(button.id);
+    setTimeout(() => {
+        button.style.backgroundColor = `${color.staticColor}`;
+    }, 500);
 }
 
 const runSequence = () => {
     let i = 1;
     for (let button of currentSequence) {
-        // Delaying Arry Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
+        // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
-            pressButton(button);
+            playButton(button);
         }, 700 * i);
         i++;
     }
@@ -133,7 +123,6 @@ const runSequence = () => {
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = () => {
     extendCurrentSequence(selectRandomBtn());
-    console.log(currentSequence);
     runSequence();
 };
 
