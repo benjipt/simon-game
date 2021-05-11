@@ -22,6 +22,13 @@ yellow: C#/Db
 blue: E
 
 */
+
+// COLOR ARRAYS - Index of 0 is default
+const green = [`#06D6A0`, `#53FFED`];
+const red = [`#EF476F`, `#FF94BC`];
+const yellow = [`#FFD166`, `#FFFFB3`];
+const blue = [`#118AB2`, `#5ED7FF`];
+
 const playSound = color => {
     const tone = new Audio(`sounds/${color}-button.mp3`);
     tone.volume = 0.2;
@@ -78,14 +85,44 @@ const extendCurrentSequence = button => {
     currentSequence.push(button);
 };
 
+// const runButtonUX = button => {
+//     const color = button.id;
+//     button.style.backgroundColor = `${color[1]}`;
+//     playSound(color);
+//     setTimeout(() => {
+//         button.style.backgroundColor = `${color[0]}`
+//     }, 500);
+// }
+
 const pressButton = button => {
     switch (button.id) {
         case 'green':
-            button.style.backgroundColor = '#53FFED';
+            button.style.backgroundColor = green[1];
             playSound(button.id);
             setTimeout(() => {
-                button.style.backgroundColor = '#06D6A0'
-            }, 1000);
+                button.style.backgroundColor = green[0];
+            }, 500);
+            break;
+        case 'red':
+            button.style.backgroundColor = red[1];
+            playSound(button.id);
+            setTimeout(() => {
+                button.style.backgroundColor = red[0];
+            }, 500);
+            break;
+        case 'yellow':
+            button.style.backgroundColor = yellow[1];
+            playSound(button.id);
+            setTimeout(() => {
+                button.style.backgroundColor = yellow[0];
+            }, 500);
+            break;
+        case 'blue':
+            button.style.backgroundColor = blue[1];
+            playSound(button.id);
+            setTimeout(() => {
+                button.style.backgroundColor = blue[0];
+            }, 500);
             break;
     }
 }
@@ -94,7 +131,7 @@ const runSequence = () => {
     for (let button of currentSequence) {
         setTimeout(() => {
             pressButton(button);
-        }, 500);
+        }, 800);
     }
 }
 
@@ -105,6 +142,7 @@ const runSequence = () => {
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = () => {
-    extendCurrentSequence(buttons[0]);
+    extendCurrentSequence(selectRandomBtn());
+    console.log(currentSequence);
     runSequence();
 };
