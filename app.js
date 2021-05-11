@@ -21,5 +21,14 @@ red: A
 yellow: C#/Db
 blue: E
 
-
 */
+
+// BUTTON SELECTION UX
+const greenBtn = document.querySelector('#green');
+greenBtn.onmousedown = () => {
+    greenBtn.style.backgroundColor = '#53FFED';
+};
+
+greenBtn.onmouseup = () => {
+    greenBtn.style.backgroundColor = '#06D6A0';
+}
