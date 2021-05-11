@@ -2,7 +2,6 @@
 
 body {
     background-color: #073B4C;
-    /* height: 100%; */
     margin: 0 auto;
     text-align: center;
     color: ghostwhite;
@@ -14,8 +13,11 @@ body {
 }
 
 header {
+    height: 100px;
     margin: 0 auto;
-    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* border: thin solid ghostwhite; */
     /* box-sizing: border-box; */
 }
@@ -33,8 +35,6 @@ h1 {
     flex-direction: column;
     width: 100%;
     height: 700px;
-    background-color: ghostwhite;
-    overflow: hidden;
 }
 
 .game-button {
@@ -62,16 +62,27 @@ h1 {
     transform-origin: top left;
 }
 
+.footer {
+    height: 180px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
 .play-container {
     display: flex;
     flex-flow: column;
+    justify-content: center;
+    /* border: thin solid ghostwhite; */
+    box-sizing: border-box;
 }
 
-.play-container img {
+.play-container picture {
     flex: 1 1 auto;
-    align-self: flex-end;
+    align-self: center;
 }
 
+/* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */
 
 @media (max-height: 860px) {
     .button-container {
@@ -79,28 +90,77 @@ h1 {
     }
 }
 
-/* For Pixel 2XL */
+/* For Pixel 2XL & iPhone X */
 @media (max-height: 830px) {
     .button-container {
-        height: 540px;
+        height: 575px;
+    }
+
+    .footer {
+        height: 140px;
     }
 }
 
+/* For Pixel 2 and iPhone 6/7/8 Plus */
 @media (max-height: 750px) {
+    .button-container {
+        height: 520px;
+    }
+
+    .footer {
+        height: 110px;
+    }
+}
+
+/* For Moto G4 and Galaxy S5 */
+@media (max-height: 700px) {
     .button-container {
         height: 480px;
     }
-}
 
-@media (max-height: 700px) {
-    .button-container {
-        height: 420px;
+    .footer {
+        height: 90px;
     }
 }
 
+/* For iPhone 6/7/8 & Galaxy Fold */
+@media (max-height: 670px) {
+    .button-container {
+        height: 460px;
+    }
+
+    .footer {
+        height: 100px;
+    }
+}
+
+/* For iPhone 5/SE */
 @media (max-height: 600px) {
     .button-container {
         height: 380px;
+    }
+
+    .footer {
+        height: 90px;
+    }
+}
+
+/* For iPad */
+@media (min-height: 1000px) {
+    header {
+        height: 130px;
+    }
+
+    h1 {
+        font-size: 64px;
+    }
+
+    .button-container {
+        height: 740px;
+    }
+
+    .footer {
+        height: 150px;
     }
 }
 
@@ -108,5 +168,9 @@ h1 {
 @media (min-height: 1300px) {
     .button-container {
         height: 1000px;
+    }
+
+    .footer {
+        height: 240px;
     }
 }
