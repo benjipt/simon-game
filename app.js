@@ -25,13 +25,45 @@ blue: E
 
 // BUTTON SELECTION UX
 const greenBtn = document.querySelector('#green');
-const greenTone = new Audio('sounds/green-button.wav');
-
 greenBtn.onmousedown = () => {
     greenBtn.style.backgroundColor = '#53FFED';
+    const greenTone = new Audio('sounds/green-button.mp3');
+    greenTone.volume = 0.2;
     greenTone.play();
 };
-
 greenBtn.onmouseup = () => {
     greenBtn.style.backgroundColor = '#06D6A0';
+}
+
+const redBtn = document.querySelector('#red');
+redBtn.onmousedown = () => {
+    redBtn.style.backgroundColor = '#FF94BC';
+    const redTone = new Audio('sounds/red-button.mp3');
+    redTone.volume = 0.2;
+    redTone.play();
+};
+redBtn.onmouseup = () => {
+    redBtn.style.backgroundColor = '#EF476F';
+}
+
+const yellowBtn = document.querySelector('#yellow');
+yellowBtn.onmousedown = () => {
+    yellowBtn.style.backgroundColor = '#FFFFB3';
+    const yellowTone = new Audio('sounds/yellow-button.mp3');
+    yellowTone.volume = 0.2;
+    yellowTone.play();
+}
+yellowBtn.onmouseup = () => {
+    yellowBtn.style.backgroundColor = '#FFD166';
+}
+
+const blueBtn = document.querySelector('#blue');
+blueBtn.onmousedown = () => {
+    blueBtn.style.backgroundColor = '#5ED7FF';
+    const blueTone = new Audio('sounds/blue-button.mp3');
+    blueTone.volume = 0.2;
+    blueTone.play();
+}
+blueBtn.onmouseup = () => {
+    blueBtn.style.backgroundColor = '#118AB2';
 }
