@@ -22,14 +22,18 @@ yellow: C#/Db
 blue: E
 
 */
+const playSound = color => {
+    const tone = new Audio(`sounds/${color}-button.mp3`);
+    tone.volume = 0.2;
+    tone.play();
+}
+
 
 // BUTTON SELECTION UX
 const greenBtn = document.querySelector('#green');
 greenBtn.onmousedown = () => {
     greenBtn.style.backgroundColor = '#53FFED';
-    const greenTone = new Audio('sounds/green-button.mp3');
-    greenTone.volume = 0.2;
-    greenTone.play();
+    playSound('green');
 };
 greenBtn.onmouseup = () => {
     greenBtn.style.backgroundColor = '#06D6A0';
@@ -38,9 +42,7 @@ greenBtn.onmouseup = () => {
 const redBtn = document.querySelector('#red');
 redBtn.onmousedown = () => {
     redBtn.style.backgroundColor = '#FF94BC';
-    const redTone = new Audio('sounds/red-button.mp3');
-    redTone.volume = 0.2;
-    redTone.play();
+    playSound('red');
 };
 redBtn.onmouseup = () => {
     redBtn.style.backgroundColor = '#EF476F';
@@ -49,9 +51,7 @@ redBtn.onmouseup = () => {
 const yellowBtn = document.querySelector('#yellow');
 yellowBtn.onmousedown = () => {
     yellowBtn.style.backgroundColor = '#FFFFB3';
-    const yellowTone = new Audio('sounds/yellow-button.mp3');
-    yellowTone.volume = 0.2;
-    yellowTone.play();
+    playSound('yellow');
 }
 yellowBtn.onmouseup = () => {
     yellowBtn.style.backgroundColor = '#FFD166';
@@ -60,9 +60,7 @@ yellowBtn.onmouseup = () => {
 const blueBtn = document.querySelector('#blue');
 blueBtn.onmousedown = () => {
     blueBtn.style.backgroundColor = '#5ED7FF';
-    const blueTone = new Audio('sounds/blue-button.mp3');
-    blueTone.volume = 0.2;
-    blueTone.play();
+    playSound('blue');
 }
 blueBtn.onmouseup = () => {
     blueBtn.style.backgroundColor = '#118AB2';
