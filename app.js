@@ -10,6 +10,44 @@
 
 */
 
+// BUTTON SELECTION UX
+// greenBtn.onmousedown = () => {
+//     greenBtn.style.backgroundColor = '#53FFED';
+//     playSound('green');
+// };
+// greenBtn.onmouseup = () => {
+//     greenBtn.style.backgroundColor = '#06D6A0';
+// }
+
+// redBtn.onmousedown = () => {
+//     redBtn.style.backgroundColor = '#FF94BC';
+//     playSound('red');
+// };
+// redBtn.onmouseup = () => {
+//     redBtn.style.backgroundColor = '#EF476F';
+// }
+
+// yellowBtn.onmousedown = () => {
+//     yellowBtn.style.backgroundColor = '#FFFFB3';
+//     playSound('yellow');
+// }
+// yellowBtn.onmouseup = () => {
+//     yellowBtn.style.backgroundColor = '#FFD166';
+// }
+
+// blueBtn.onmousedown = () => {
+//     blueBtn.style.backgroundColor = '#5ED7FF';
+//     playSound('blue');
+// }
+// blueBtn.onmouseup = () => {
+//     blueBtn.style.backgroundColor = '#118AB2';
+// }
+
+const greenBtn = document.querySelector('#green');
+const redBtn = document.querySelector('#red');
+const yellowBtn = document.querySelector('#yellow');
+const blueBtn = document.querySelector('#blue');
+
 const colors = [
     {
         color: `green`,
@@ -39,52 +77,15 @@ const playSound = color => {
     tone.play();
 }
 
-// BUTTON SELECTION UX
-const greenBtn = document.querySelector('#green');
-greenBtn.onmousedown = () => {
-    greenBtn.style.backgroundColor = '#53FFED';
-    playSound('green');
-};
-greenBtn.onmouseup = () => {
-    greenBtn.style.backgroundColor = '#06D6A0';
-}
-
-const redBtn = document.querySelector('#red');
-redBtn.onmousedown = () => {
-    redBtn.style.backgroundColor = '#FF94BC';
-    playSound('red');
-};
-redBtn.onmouseup = () => {
-    redBtn.style.backgroundColor = '#EF476F';
-}
-
-const yellowBtn = document.querySelector('#yellow');
-yellowBtn.onmousedown = () => {
-    yellowBtn.style.backgroundColor = '#FFFFB3';
-    playSound('yellow');
-}
-yellowBtn.onmouseup = () => {
-    yellowBtn.style.backgroundColor = '#FFD166';
-}
-
-const blueBtn = document.querySelector('#blue');
-blueBtn.onmousedown = () => {
-    blueBtn.style.backgroundColor = '#5ED7FF';
-    playSound('blue');
-}
-blueBtn.onmouseup = () => {
-    blueBtn.style.backgroundColor = '#118AB2';
-}
-
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
-const buttons = [greenBtn, redBtn, yellowBtn, blueBtn];
-let currentSequence = [];
 
 const selectRandomBtn = () => {
+    const buttons = [greenBtn, redBtn, yellowBtn, blueBtn];
     return buttons[Math.floor(Math.random() * buttons.length)];
 };
 
+let currentSequence = [];
 const extendCurrentSequence = button => {
     currentSequence.push(button);
 };
@@ -96,6 +97,24 @@ const playButton = button => {
     setTimeout(() => {
         button.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
+}
+
+const pressButton = e => {
+    // console.log(e);
+    const { target } = e;
+    const colorObj = colors.find( ({ color }) => color === target.id);
+    target.style.backgroundColor = `${colorObj.dynamicColor}`;
+    playSound(target.id);
+    setTimeout(() => {
+        target.style.backgroundColor = `${colorObj.staticColor}`;
+    }, 500);
+}
+
+const releaseButton = e => {
+    // console.log(e);
+    const { target } = e;
+    const colorObj = colors.find( ({ color }) => color === target.id);
+    target.style.backgroundColor = `${colorObj.staticColor}`;
 }
 
 const runSequence = async () => {
@@ -110,9 +129,12 @@ const runSequence = async () => {
 }
 
 const matchSequence = async () => {
+    const buttons = document.querySelector('.button-container');
 
+    buttons.addEventListener('click', pressButton);
 }
 
+// Async and Await in JavaScript: https://itnext.io/async-and-await-in-javascript-the-extension-to-a-promise-f4e0048964ac
 const playRound = async () => {
     await runSequence();
     await matchSequence();
@@ -122,7 +144,8 @@ const playRound = async () => {
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = () => {
     extendCurrentSequence(selectRandomBtn());
-    runSequence();
+    console.log(currentSequence);
+    playRound();
 };
 
 
