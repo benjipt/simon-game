@@ -42,36 +42,24 @@ h1 {
     height: 25%;
 }
 
-#green {
-    background-color: #06D6A0;
+.game-button:hover {
+    cursor: pointer;
 }
 
-#green:hover {
-    /* background-color: #53FFED; */
+#green {
+    background-color: #06D6A0;
 }
 
 #red {
     background-color: #EF476F;
 }
 
-#red:hover {
-    /* background-color: #FF94BC; */
-}
-
 #yellow {
     background-color: #FFD166;
 }
 
-#yellow:hover {
-    /* background-color: #FFFFB3; */
-}
-
 #blue {
     background-color: #118AB2;
-}
-
-#blue:hover {
-    /* background-color: #5ED7FF; */
 }
 
 .footer {
@@ -86,12 +74,15 @@ h1 {
     flex-flow: column;
     justify-content: center;
     /* border: thin solid ghostwhite; */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
-.play-container picture {
-    flex: 1 1 auto;
-    align-self: center;
+.play-button {
+    /* align-self: center; */
+}
+
+.play-button:hover {
+    cursor: pointer;
 }
 
 /* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */

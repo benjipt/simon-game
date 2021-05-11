@@ -1,25 +1,12 @@
 /*
-[] - Play button will initiate game
-[] - Random color will light up and emit tone.
+[x] - Play button will initiate game
+[x] - Random color will light up and emit tone.
 [] - Player will press button(s) to match the random sequence.
 [] - After each successfull turn by player, game will add additional random button to sequence and replay entire sequence for the player.
 [] - After game plays the updated sequence, player will attempt to match.
 [] - This process will repeat until player makes a mistake and the game ends.
 [] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
 [] - Game will keep track of longest sequence and display to player.
-
-
-COLOR CHANGE ON SELECTION~>
-green: 53FFED
-red: FF94BC
-yellow: FFFFB3
-blue: 5ED7FF
-
-NOTES PLAYED ON COLOR SELECTION~>
-green: E (octave lower than blue)
-red: A
-yellow: C#/Db
-blue: E
 
 */
 
@@ -152,13 +139,13 @@ playBtn.onclick = () => {
 
 
 /*
-                  _                _ _       _   
-            ____ | |              (_|_)     | |  
-           / __ \| |__   ___ _ __  _ _ _ __ | |_ 
-          / / _` | '_ \ / _ \ '_ \| | | '_ \| __|
-         | | (_| | |_) |  __/ | | | | | |_) | |_ 
-          \ \__,_|_.__/ \___|_| |_| |_| .__/ \__|
-           \____/                _/ | | |        
-                                |__/  |_|             
-
+         __                                       __      
+   __   /\ \                       __  __        /\ \__   
+  /'_`\_\ \ \____     __    ___   /\_\/\_\  _____\ \ ,_\  
+ /'/'_` \\ \ '__`\  /'__`\/' _ `\ \/\ \/\ \/\ '__`\ \ \/  
+/\ \ \L\ \\ \ \L\ \/\  __//\ \/\ \ \ \ \ \ \ \ \L\ \ \ \_ 
+\ \ `\__,_\\ \_,__/\ \____\ \_\ \_\_\ \ \ \_\ \ ,__/\ \__\
+ \ `\_____\ \/___/  \/____/\/_/\/_/\ \_\ \/_/\ \ \/  \/__/
+  `\/_____/                       \ \____/    \ \_\       
+                                   \/___/      \/_/                    
 */
