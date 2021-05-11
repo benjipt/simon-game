@@ -10,12 +10,6 @@
 
 */
 
-// COLOR ARRAYS - Index of 0 is default
-// const green = [`#06D6A0`, `#53FFED`];
-// const red = [`#EF476F`, `#FF94BC`];
-// const yellow = [`#FFD166`, `#FFFFB3`];
-// const blue = [`#118AB2`, `#5ED7FF`];
-
 const colors = [
     {
         color: `green`,
@@ -96,15 +90,15 @@ const extendCurrentSequence = button => {
 };
 
 const playButton = button => {
-    const color = colors.find( ({ color }) => color === button.id);
-    button.style.backgroundColor = `${color.dynamicColor}`;
+    const colorObj = colors.find( ({ color }) => color === button.id);
+    button.style.backgroundColor = `${colorObj.dynamicColor}`;
     playSound(button.id);
     setTimeout(() => {
-        button.style.backgroundColor = `${color.staticColor}`;
+        button.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
 }
 
-const runSequence = () => {
+const runSequence = async () => {
     let i = 1;
     for (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
@@ -115,10 +109,15 @@ const runSequence = () => {
     }
 }
 
-// const playRound = () => {
-//     extendCurrentSequence(selectRandomButton());
+const matchSequence = async () => {
 
-// }
+}
+
+const playRound = async () => {
+    await runSequence();
+    await matchSequence();
+
+}
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = () => {
