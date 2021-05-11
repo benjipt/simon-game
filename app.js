@@ -68,12 +68,43 @@ blueBtn.onmouseup = () => {
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
 const buttons = [greenBtn, redBtn, yellowBtn, blueBtn];
+let currentSequence = [];
 
-const selectRandomButton = () => {
+const selectRandomBtn = () => {
     return buttons[Math.floor(Math.random() * buttons.length)];
 };
 
+const extendCurrentSequence = button => {
+    currentSequence.push(button);
+};
+
+const pressButton = button => {
+    switch (button.id) {
+        case 'green':
+            button.style.backgroundColor = '#53FFED';
+            playSound(button.id);
+            setTimeout(() => {
+                button.style.backgroundColor = '#06D6A0'
+            }, 1000);
+            break;
+    }
+}
+
+const runSequence = () => {
+    for (let button of currentSequence) {
+        setTimeout(() => {
+            pressButton(button);
+        }, 500);
+    }
+}
+
+// const playRound = () => {
+//     extendCurrentSequence(selectRandomButton());
+
+// }
+
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = () => {
-    console.log(selectRandomButton());
+    extendCurrentSequence(buttons[0]);
+    runSequence();
 };
