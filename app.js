@@ -25,8 +25,11 @@ blue: E
 
 // BUTTON SELECTION UX
 const greenBtn = document.querySelector('#green');
+const greenTone = new Audio('sounds/green-button.wav');
+
 greenBtn.onmousedown = () => {
     greenBtn.style.backgroundColor = '#53FFED';
+    greenTone.play();
 };
 
 greenBtn.onmouseup = () => {
