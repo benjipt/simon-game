@@ -130,6 +130,7 @@ const pressButton = button => {
 const runSequence = () => {
     let i = 1;
     for (let button of currentSequence) {
+        // Delaying Arry Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
             pressButton(button);
         }, 700 * i);
@@ -148,3 +149,16 @@ playBtn.onclick = () => {
     console.log(currentSequence);
     runSequence();
 };
+
+
+/*
+                  _                _ _       _   
+            ____ | |              (_|_)     | |  
+           / __ \| |__   ___ _ __  _ _ _ __ | |_ 
+          / / _` | '_ \ / _ \ '_ \| | | '_ \| __|
+         | | (_| | |_) |  __/ | | | | | |_) | |_ 
+          \ \__,_|_.__/ \___|_| |_| |_| .__/ \__|
+           \____/                _/ | | |        
+                                |__/  |_|             
+
+*/
