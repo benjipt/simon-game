@@ -28,7 +28,6 @@ const playSound = color => {
     tone.play();
 }
 
-
 // BUTTON SELECTION UX
 const greenBtn = document.querySelector('#green');
 greenBtn.onmousedown = () => {
@@ -65,3 +64,16 @@ blueBtn.onmousedown = () => {
 blueBtn.onmouseup = () => {
     blueBtn.style.backgroundColor = '#118AB2';
 }
+
+// GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+let currentGame = false;
+const buttons = [greenBtn, redBtn, yellowBtn, blueBtn];
+
+const selectRandomButton = () => {
+    return buttons[Math.floor(Math.random() * buttons.length)];
+};
+
+const playBtn = document.querySelector('.play-button');
+playBtn.onclick = () => {
+    console.log(selectRandomButton());
+};
