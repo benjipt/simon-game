@@ -110,13 +110,6 @@ const pressButton = e => {
     }, 500);
 }
 
-const releaseButton = e => {
-    // console.log(e);
-    const { target } = e;
-    const colorObj = colors.find( ({ color }) => color === target.id);
-    target.style.backgroundColor = `${colorObj.staticColor}`;
-}
-
 const runSequence = async () => {
     let i = 1;
     for (let button of currentSequence) {
