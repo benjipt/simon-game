@@ -111,15 +111,17 @@ const pressButton = e => {
 }
 
 const runSequence = async () => {
-    let i = 1;
+    let i = 0;
     console.log(`Sequence has started`);
-    for (let button of currentSequence) {
+    for await (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
             playButton(button);
+            console.log(`end of loop iteration`);
         }, 700 * i);
         i++;
     }
+    return `For loop completed`;
 }
 
 const matchSequence = async () => {
