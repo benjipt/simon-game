@@ -112,19 +112,21 @@ const pressButton = e => {
 
 const runSequence = async () => {
     let i = 1;
-    for (let button of currentSequence) {
-        // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
-        setTimeout(() => {
-            playButton(button);
-        }, 700 * i);
-        i++;
-    }
+    console.log(`Sequence has started`);
+    return new Promise((resolve) => {
+        for (let button of currentSequence) {
+            // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
+            setTimeout(() => {
+                playButton(button);
+            }, 700 * i);
+            i++;
+        }
+        resolve(`Sequence has ended`);
+    });
 }
 
 const matchSequence = async () => {
-    const buttons = document.querySelector('.button-container');
 
-    buttons.addEventListener('click', pressButton);
 }
 
 // Async and Await in JavaScript: https://itnext.io/async-and-await-in-javascript-the-extension-to-a-promise-f4e0048964ac
@@ -135,12 +137,14 @@ const playRound = async () => {
 }
 
 const playBtn = document.querySelector('.play-button');
-playBtn.onclick = () => {
+playBtn.onclick = async () => {
     extendCurrentSequence(selectRandomBtn());
-    console.log(currentSequence);
-    playRound();
+    const result = await runSequence();
+    console.log(result);
 };
 
+const buttons = document.querySelector('.button-container');
+buttons.addEventListener('click', pressButton);
 
 /*
          __                                       __      
