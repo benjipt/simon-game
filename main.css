@@ -67,27 +67,27 @@ h1 {
     display: flex;
     flex-flow: column;
     justify-content: center;
-}
-
-.play-container {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    /* border: thin solid ghostwhite; */
-    /* box-sizing: border-box; */
+    /* align-items: center; */
 }
 
 .play-button {
     /* align-self: center; */
 }
 
-.play-button:hover {
+img:hover {
     cursor: pointer;
 }
 
-.play-button:active {
+img:active {
     transform: scale(1.1);
 }
+
+/* .score-tracker {
+    height: 2em;
+    width: 100%;
+    background-color: ghostwhite;
+    align-self: flex-end;
+} */
 
 /* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */
 

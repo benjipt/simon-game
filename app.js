@@ -138,6 +138,12 @@ const gameOver = () => {
     }, 600);
 };
 
+// Score Tracker
+// const scoreTracker = document.createElement('div');
+// scoreTracker.classList.add('score-tracker');
+// const footer = document.querySelector('.footer');
+// footer.append(scoreTracker);
+
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = cycleGame;
 
