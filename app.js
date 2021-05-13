@@ -79,13 +79,14 @@ const playSound = color => {
 
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
+let currentSequence = [];
+let playerSequence = [];
 
 const selectRandomBtn = () => {
     const buttons = [greenBtn, redBtn, yellowBtn, blueBtn];
     return buttons[Math.floor(Math.random() * buttons.length)];
 };
 
-let currentSequence = [];
 const extendCurrentSequence = button => {
     currentSequence.push(button);
 };
@@ -99,28 +100,35 @@ const playButton = button => {
     }, 500);
 }
 
+const addToPlayerSequence = button => playerSequence.push(button);
+const clearPlayerSequence = () => playerSequence = [];
+
 const pressButton = e => {
-    // console.log(e);
     const { target } = e;
     const colorObj = colors.find( ({ color }) => color === target.id);
     target.style.backgroundColor = `${colorObj.dynamicColor}`;
     playSound(target.id);
+    addToPlayerSequence(target);
     setTimeout(() => {
         target.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
 }
 
 const runSequence = async () => {
+    console.log(playerSequence);
+    clearPlayerSequence();
+    console.log(playerSequence);
     let i = 0;
-    console.log(`Sequence has started`);
+    // console.log(`Sequence has started`);
     for await (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
             playButton(button);
-            console.log(`end of loop iteration`);
+            // console.log(`end of loop iteration`);
         }, 700 * i);
         i++;
     }
+    // maybe solution: https://github.com/vuejs/vuex/issues/455
     return `For loop completed`;
 }
 
@@ -132,14 +140,13 @@ const matchSequence = async () => {
 const playRound = async () => {
     await runSequence();
     await matchSequence();
-
 }
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = async () => {
     extendCurrentSequence(selectRandomBtn());
-    const result = await runSequence();
-    console.log(result);
+    const result = runSequence();
+    // console.log(result);
 };
 
 const buttons = document.querySelector('.button-container');
