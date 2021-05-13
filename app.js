@@ -122,13 +122,18 @@ const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
     console.log(`Current Round: ${currentSequence.length}`);
     runSequence();
-}
+};
 
 const gameOver = () => {
     console.log(`Game Over`);
     currentSequence = [];
     clearPlayerSequence();
-}
+    const tone = new Audio('sounds/gameover-tone.mp3');
+    tone.volume = 0.4;
+    setTimeout(() => {
+        tone.play();
+    }, 600);
+};
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = cycleGame;
