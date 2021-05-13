@@ -15,7 +15,6 @@ UX improvements:
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
-[] - Regular button sounds trigger after game over.
 [] - User cannot select buttons while current sequence is being played.
 
 Bugs:
@@ -64,16 +63,8 @@ const playSound = color => {
     }
 };
 
-const btnEffect = target => {
+const btnEffect = button => {
     // From MDN .find example on destructuring.
-    const colorObj = colors.find( ({ color }) => color === target.id);
-    target.style.backgroundColor = `${colorObj.dynamicColor}`;
-    setTimeout(() => {
-        target.style.backgroundColor = `${colorObj.staticColor}`;
-    }, 500);
-};
-
-const gamePressesBtn = button => {
     const colorObj = colors.find( ({ color }) => color === button.id);
     button.style.backgroundColor = `${colorObj.dynamicColor}`;
     playSound(button.id);
@@ -101,6 +92,7 @@ refreshBtn.onclick = () => {
 
 const getScore = () => scoreTracker.innerText = `${currentSequence.length}`;
 
+const hidePlayBtn = () => startBtn.style.display = 'none';
 
 const displayScore = () => {
     hidePlayBtn();
@@ -109,17 +101,9 @@ const displayScore = () => {
     footer.append(scoreTracker);
 };
 
-const removeScore = () => {
-    footer.removeChild(scoreTracker);
-}
-
-const displayRefreshBtn = () => {
-    refreshBtn.style.display = 'block';
-};
-
-const hideRefreshBtn = () => {
-    refreshBtn.style.display = 'none';
-}
+const removeScore = () => footer.removeChild(scoreTracker);
+const displayRefreshBtn = () => refreshBtn.style.display = 'block';
+const hideRefreshBtn = () => refreshBtn.style.display = 'none';
 
 const animateRefreshBtn = () => {
     style.transform = `rotate(360deg)`;
@@ -130,8 +114,6 @@ const clearAnimation = () => {
     style.removeProperty(`transform`);
     style.removeProperty(`transition`);
 }
-
-const hidePlayBtn = () => startBtn.style.display = 'none';
 // <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APP BAR UX
 
 
@@ -172,7 +154,7 @@ const runSequence = () => {
     for (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
-            gamePressesBtn(button);
+            btnEffect(button);
         }, 700 * i);
         i++;
     }
@@ -186,10 +168,9 @@ const cycleGame = () => {
 
 const pressButton = e => {
     const { target } = e;
-    btnEffect(target);
     addToPlayerSequence(target);
     checkButtonMatch();
-    playSound(target.id);
+    btnEffect(target);
     checkFinishTurn();
 };
 
