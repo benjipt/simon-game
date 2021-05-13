@@ -75,7 +75,7 @@ img:hover {
     cursor: pointer;
 }
 
-img:active {
+.play-button img:active {
     transform: scale(1.1);
 }
 

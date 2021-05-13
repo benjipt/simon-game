@@ -17,6 +17,9 @@ Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
 [] - Regular button sounds trigger after game over.
 [] - User cannot select buttons while current sequence is being played.
+
+Bugs:
+[] - Sound delay occurs on Safari desktop & mobile Chrome/Safari
 */
 
 const greenBtn = document.querySelector('#green');
@@ -152,6 +155,7 @@ const gameOver = () => {
     clearPlayerSequence();
     removeScore();
     displayRefreshBtn();
+    clearAnimation();
     currentGame = false;
 };
 
@@ -185,6 +189,20 @@ const hideRefreshBtn = () => {
     refreshBtn.style.display = 'none';
 }
 
+const animateRefreshBtn = () => {
+    const { style } = refreshBtn;
+    style.transform = `rotate(360deg)`;
+    style.transition = `all 0.2s`;
+}
+
+const clearAnimation = () => {
+    const { style } = refreshBtn;
+    style.removeProperty(`transform`);
+    style.removeProperty(`transition`);
+}
+
+// const clearAnimationRefreshBtn = 
+
 const hidePlayBtn = () => {
     playBtn.style.display = 'none';
 }
@@ -196,7 +214,10 @@ const buttons = document.querySelector('.button-container');
 buttons.onclick = pressButton;
 
 const refreshBtn = document.querySelector('.refresh-button');
-refreshBtn.onclick = startGame;
+refreshBtn.onclick = () => {
+    animateRefreshBtn();
+    setTimeout(startGame, 200);
+};
 
 /*
          __                                       __      
