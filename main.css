@@ -81,7 +81,6 @@ img:hover {
 
 .score-tracker {
     font-size: 62px;
-    transition: all 0.5s linear;
 }
 
 .refresh-button {

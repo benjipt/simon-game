@@ -63,12 +63,75 @@ const playSound = color => {
 };
 
 const btnEffect = target => {
+    // From MDN .find example on destructuring.
     const colorObj = colors.find( ({ color }) => color === target.id);
     target.style.backgroundColor = `${colorObj.dynamicColor}`;
     setTimeout(() => {
         target.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
 };
+
+const playButton = button => {
+    const colorObj = colors.find( ({ color }) => color === button.id);
+    button.style.backgroundColor = `${colorObj.dynamicColor}`;
+    playSound(button.id);
+    setTimeout(() => {
+        button.style.backgroundColor = `${colorObj.staticColor}`;
+    }, 500);
+};
+
+const pressButton = e => {
+    const { target } = e;
+    btnEffect(target);
+    addToPlayerSequence(target);
+    checkButtonMatch();
+    playSound(target.id);
+    checkFinishTurn();
+};
+
+
+// APP BAR UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+// Score Tracker
+const displayScore = () => {
+    hidePlayBtn();
+    hideRefreshBtn();
+    scoreTracker.innerText = `${currentSequence.length - 1}`; // ensures that score begins incrementing on first successful match.
+    footer.append(scoreTracker);
+};
+
+const updateScore = () => {
+    scoreTracker.innerText = `${currentSequence.length}`;
+};
+
+const removeScore = () => {
+    footer.removeChild(scoreTracker);
+}
+
+const displayRefreshBtn = () => {
+    refreshBtn.style.display = 'block';
+};
+
+const hideRefreshBtn = () => {
+    refreshBtn.style.display = 'none';
+}
+
+const animateRefreshBtn = () => {
+    const { style } = refreshBtn;
+    style.transform = `rotate(360deg)`;
+    style.transition = `all 0.2s`;
+}
+
+const clearAnimation = () => {
+    const { style } = refreshBtn;
+    style.removeProperty(`transform`);
+    style.removeProperty(`transition`);
+}
+
+const hidePlayBtn = () => {
+    playBtn.style.display = 'none';
+}
+// <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APP BAR UX
+
 
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
@@ -84,19 +147,10 @@ const extendCurrentSequence = button => {
     currentSequence.push(button);
 };
 
-const playButton = button => {
-    const colorObj = colors.find( ({ color }) => color === button.id);
-    button.style.backgroundColor = `${colorObj.dynamicColor}`;
-    playSound(button.id);
-    setTimeout(() => {
-        button.style.backgroundColor = `${colorObj.staticColor}`;
-    }, 500);
-};
-
 const addToPlayerSequence = button => playerSequence.push(button);
 const clearPlayerSequence = () => playerSequence = [];
 
-const evaluatePlayerFinishTurn = () => {
+const checkFinishTurn = () => {
     if (currentGame && (playerSequence.length === currentSequence.length)) {
         setTimeout(() => cycleGame(), 1000);
     }
@@ -110,15 +164,6 @@ const checkButtonMatch = () => {
             }
         }
     }
-};
-
-const pressButton = e => {
-    const { target } = e;
-    btnEffect(target);
-    addToPlayerSequence(target);
-    checkButtonMatch();
-    playSound(target.id);
-    evaluatePlayerFinishTurn();
 };
 
 const runSequence = () => {
@@ -163,50 +208,6 @@ const gameOver = () => {
 const scoreTracker = document.createElement('p');
 scoreTracker.classList.add('score-tracker');
 const footer = document.querySelector('.footer');
-
-// Score Tracker
-const displayScore = () => {
-    hidePlayBtn();
-    hideRefreshBtn();
-    scoreTracker.innerText = `${currentSequence.length}`;
-    footer.append(scoreTracker);
-};
-
-const updateScore = () => {
-    scoreTracker.innerText = `${currentSequence.length}`;
-};
-
-const removeScore = () => {
-    footer.removeChild(scoreTracker);
-}
-
-const displayRefreshBtn = () => {
-    // removes 'display: none' from element
-    // refreshBtn.style.removeProperty('display');
-    refreshBtn.style.display = 'block';
-};
-
-const hideRefreshBtn = () => {
-    refreshBtn.style.display = 'none';
-}
-
-const animateRefreshBtn = () => {
-    const { style } = refreshBtn;
-    style.transform = `rotate(360deg)`;
-    style.transition = `all 0.2s`;
-}
-
-const clearAnimation = () => {
-    const { style } = refreshBtn;
-    style.removeProperty(`transform`);
-    style.removeProperty(`transition`);
-}
-
-// const clearAnimationRefreshBtn = 
-
-const hidePlayBtn = () => {
-    playBtn.style.display = 'none';
-}
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = startGame;
