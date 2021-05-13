@@ -8,6 +8,9 @@
 [x] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
 [] - Game will keep track of longest sequence and display to player.
 
+
+Edge cases:
+[] - User cannot click play and advance game cycle
 */
 
 const greenBtn = document.querySelector('#green');

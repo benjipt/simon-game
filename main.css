@@ -85,6 +85,10 @@ h1 {
     cursor: pointer;
 }
 
+.play-button:active {
+    transform: scale(1.1);
+}
+
 /* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */
 
 @media (max-height: 860px) {
