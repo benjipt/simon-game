@@ -19,12 +19,9 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: thin solid ghostwhite; */
-    /* box-sizing: border-box; */
 }
 
 h1 {
-    /* font-family: 'McLaren', cursive; */
     font-size: 48px;
 }
 
@@ -68,11 +65,6 @@ h1 {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    /* align-items: center; */
-}
-
-.play-button {
-    /* align-self: center; */
 }
 
 img:hover {
@@ -84,9 +76,7 @@ img:active {
 }
 
 .score-tracker {
-    /* font-family: 'Montserrat', sans-serif; */
     font-size: 62px;
-    /* color: ghostwhite; */
 }
 
 /* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */

@@ -108,7 +108,6 @@ const checkButtonMatch = () => {
     }
 };
 
-
 const pressButton = e => {
     const { target } = e;
     btnEffect(target);
