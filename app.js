@@ -27,6 +27,8 @@ const redBtn = document.querySelector('#red');
 const yellowBtn = document.querySelector('#yellow');
 const blueBtn = document.querySelector('#blue');
 
+
+// GAME BUTTON UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 const colors = [
     {
         color: `green`,
@@ -71,7 +73,7 @@ const btnEffect = target => {
     }, 500);
 };
 
-const playButton = button => {
+const gamePressesBtn = button => {
     const colorObj = colors.find( ({ color }) => color === button.id);
     button.style.backgroundColor = `${colorObj.dynamicColor}`;
     playSound(button.id);
@@ -88,19 +90,31 @@ const pressButton = e => {
     playSound(target.id);
     checkFinishTurn();
 };
+// <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME BUTTON UX
+
 
 
 // APP BAR UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
-// Score Tracker
+
+const scoreTracker = document.createElement('p');
+scoreTracker.classList.add('score-tracker');
+const footer = document.querySelector('.footer');
+
+const refreshBtn = document.querySelector('.refresh-button');
+const { style } = refreshBtn;
+refreshBtn.onclick = () => {
+    animateRefreshBtn();
+    setTimeout(startGame, 200);
+};
+
+const getScore = () => scoreTracker.innerText = `${currentSequence.length - 1}`;
+
+
 const displayScore = () => {
     hidePlayBtn();
     hideRefreshBtn();
-    scoreTracker.innerText = `${currentSequence.length - 1}`; // ensures that score begins incrementing on first successful match.
+    getScore();
     footer.append(scoreTracker);
-};
-
-const updateScore = () => {
-    scoreTracker.innerText = `${currentSequence.length}`;
 };
 
 const removeScore = () => {
@@ -116,20 +130,16 @@ const hideRefreshBtn = () => {
 }
 
 const animateRefreshBtn = () => {
-    const { style } = refreshBtn;
     style.transform = `rotate(360deg)`;
     style.transition = `all 0.2s`;
 }
 
 const clearAnimation = () => {
-    const { style } = refreshBtn;
     style.removeProperty(`transform`);
     style.removeProperty(`transition`);
 }
 
-const hidePlayBtn = () => {
-    playBtn.style.display = 'none';
-}
+const hidePlayBtn = () => startBtn.style.display = 'none';
 // <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APP BAR UX
 
 
@@ -143,10 +153,8 @@ const selectRandomBtn = () => {
     return buttons[Math.floor(Math.random() * buttons.length)];
 };
 
-const extendCurrentSequence = button => {
-    currentSequence.push(button);
-};
-
+const extendCurrentSequence = button => currentSequence.push(button);
+const clearCurrentSequence = () => currentSequence = [];
 const addToPlayerSequence = button => playerSequence.push(button);
 const clearPlayerSequence = () => playerSequence = [];
 
@@ -172,7 +180,7 @@ const runSequence = () => {
     for (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
-            playButton(button);
+            gamePressesBtn(button);
         }, 700 * i);
         i++;
     }
@@ -180,8 +188,7 @@ const runSequence = () => {
 
 const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
-    console.log(`Current Round: ${currentSequence.length}`);
-    updateScore();
+    getScore();
     runSequence();
 };
 
@@ -189,38 +196,26 @@ const startGame = () => {
     if (!currentGame) {
         currentGame = true;
         extendCurrentSequence(selectRandomBtn());
-        console.log(`Current Round: ${currentSequence.length}`);
         displayScore();
         runSequence();
     }
 };
 
 const gameOver = () => {
-    console.log(`Game Over`);
-    currentSequence = [];
+    // console.log('game over');
+    currentGame = false;
     clearPlayerSequence();
+    clearCurrentSequence();
     removeScore();
     displayRefreshBtn();
     clearAnimation();
-    currentGame = false;
 };
 
-const scoreTracker = document.createElement('p');
-scoreTracker.classList.add('score-tracker');
-const footer = document.querySelector('.footer');
+const startBtn = document.querySelector('.play-button');
+startBtn.onclick = startGame;
 
-const playBtn = document.querySelector('.play-button');
-playBtn.onclick = startGame;
-
-const buttons = document.querySelector('.button-container');
-buttons.onclick = pressButton;
-
-const refreshBtn = document.querySelector('.refresh-button');
-refreshBtn.onclick = () => {
-    animateRefreshBtn();
-    setTimeout(startGame, 200);
-};
-
+const buttonContainer = document.querySelector('.button-container');
+buttonContainer.onclick = pressButton;
 /*
          __                                       __      
    __   /\ \                       __  __        /\ \__   
