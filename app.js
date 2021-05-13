@@ -10,7 +10,7 @@
 
 
 Edge cases:
-[] - User cannot click play and advance game cycle
+[x] - User cannot click play and advance game cycle if current game.
 */
 
 const greenBtn = document.querySelector('#green');
@@ -56,6 +56,7 @@ const btnEffect = target => {
 }
 
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+let currentGame = false;
 let currentSequence = [];
 let playerSequence = [];
 
@@ -127,6 +128,15 @@ const cycleGame = () => {
     runSequence();
 };
 
+const startGame = () => {
+    if (!currentGame) {
+        currentGame = true;
+        extendCurrentSequence(selectRandomBtn());
+        console.log(`Current Round: ${currentSequence.length}`);
+        runSequence();
+    }
+}
+
 const gameOver = () => {
     console.log(`Game Over`);
     currentSequence = [];
@@ -136,6 +146,7 @@ const gameOver = () => {
     setTimeout(() => {
         tone.play();
     }, 600);
+    currentGame = false;
 };
 
 // Score Tracker
@@ -145,7 +156,7 @@ const gameOver = () => {
 // footer.append(scoreTracker);
 
 const playBtn = document.querySelector('.play-button');
-playBtn.onclick = cycleGame;
+playBtn.onclick = startGame;
 
 const buttons = document.querySelector('.button-container');
 buttons.onclick = pressButton;
