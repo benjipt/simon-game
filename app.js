@@ -103,10 +103,11 @@ const evaluatePlayerFinishTurn = () => {
 };
 
 const checkButtonMatch = () => {
-    // How to know if two arrays have the same values: https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values
-    for (let i=0; i<playerSequence.length; i++) {
-        if (playerSequence[i] !== currentSequence[i]) {
-            gameOver();
+    if (currentGame) {
+        for (let i=0; i<playerSequence.length; i++) {
+            if (playerSequence[i] !== currentSequence[i]) {
+                gameOver();
+            }
         }
     }
 };
