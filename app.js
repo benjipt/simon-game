@@ -10,39 +10,6 @@
 
 */
 
-// BUTTON SELECTION UX
-// greenBtn.onmousedown = () => {
-//     greenBtn.style.backgroundColor = '#53FFED';
-//     playSound('green');
-// };
-// greenBtn.onmouseup = () => {
-//     greenBtn.style.backgroundColor = '#06D6A0';
-// }
-
-// redBtn.onmousedown = () => {
-//     redBtn.style.backgroundColor = '#FF94BC';
-//     playSound('red');
-// };
-// redBtn.onmouseup = () => {
-//     redBtn.style.backgroundColor = '#EF476F';
-// }
-
-// yellowBtn.onmousedown = () => {
-//     yellowBtn.style.backgroundColor = '#FFFFB3';
-//     playSound('yellow');
-// }
-// yellowBtn.onmouseup = () => {
-//     yellowBtn.style.backgroundColor = '#FFD166';
-// }
-
-// blueBtn.onmousedown = () => {
-//     blueBtn.style.backgroundColor = '#5ED7FF';
-//     playSound('blue');
-// }
-// blueBtn.onmouseup = () => {
-//     blueBtn.style.backgroundColor = '#118AB2';
-// }
-
 const greenBtn = document.querySelector('#green');
 const redBtn = document.querySelector('#red');
 const yellowBtn = document.querySelector('#yellow');
@@ -118,8 +85,6 @@ const evaluatePlayerFinishTurn = () => {
         } else {
             gameOver();
         }
-    } else {
-        return false;
     }
 }
 
@@ -141,26 +106,21 @@ const pressButton = e => {
     evaluatePlayerFinishTurn();
 }
 
-const runSequence = async () => {
-    console.log(playerSequence);
+const runSequence = () => {
     clearPlayerSequence();
-    console.log(playerSequence);
     let i = 0;
-    // console.log(`Sequence has started`);
-    for await (let button of currentSequence) {
+    for (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
         setTimeout(() => {
             playButton(button);
-            // console.log(`end of loop iteration`);
         }, 700 * i);
         i++;
     }
-    // maybe solution: https://github.com/vuejs/vuex/issues/455
-    return `For loop completed`;
 }
 
 const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
+    console.log(`Current Round: ${currentSequence.length}`);
     runSequence();
 }
 
