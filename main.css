@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=McLaren&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=McLaren&family=Source+Code+Pro:wght@500;600;700&display=swap');
 
 body {
     background-color: #073B4C;
@@ -22,7 +22,9 @@ header {
 }
 
 h1 {
-    font-size: 48px;
+    /* font-family: 'Source Code Pro', monospace; */
+    font-size: 84px;
+    /* font-weight: 600; */
 }
 
 .button-container {
@@ -80,7 +82,10 @@ img:hover {
 }
 
 .score-tracker {
-    font-size: 62px;
+    font-family: 'Source Code Pro', monospace;
+    color: ghostwhite;
+    font-size: 84px;
+    font-weight: 600;
 }
 
 .refresh-button {

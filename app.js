@@ -184,7 +184,6 @@ const startGame = () => {
 };
 
 const gameOver = () => {
-    // console.log('game over');
     currentGame = false;
     clearPlayerSequence();
     clearCurrentSequence();
