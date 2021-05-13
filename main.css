@@ -67,6 +67,10 @@ h1 {
     justify-content: center;
 }
 
+.play-button {
+    display: block;
+}
+
 img:hover {
     cursor: pointer;
 }
@@ -77,6 +81,10 @@ img:active {
 
 .score-tracker {
     font-size: 62px;
+}
+
+.refresh-button {
+    display: none;
 }
 
 /* RESPONSIVE SIZING~~~~~~~~~~~~~~~~~~~> */

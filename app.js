@@ -7,11 +7,11 @@
 [x] - This process will repeat until player makes a mistake and the game ends.
 [x] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
 [x] - Display current round while game is being played.
-[] - Game will display 'play again' icon after game over.
+[x] - Display 'refresh' icon after game over.
 
 UX improvements:
 [x] - Game Over is triggered at wrong button selection.
-[] - gameover-tone played on wrong button selection instead of normal button tone.
+[x] - gameover-tone played on wrong button selection instead of normal button tone.
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
@@ -150,6 +150,8 @@ const gameOver = () => {
     console.log(`Game Over`);
     currentSequence = [];
     clearPlayerSequence();
+    removeScore();
+    displayRefreshBtn();
     currentGame = false;
 };
 
@@ -159,8 +161,9 @@ const footer = document.querySelector('.footer');
 
 // Score Tracker
 const displayScore = () => {
+    hidePlayBtn();
+    hideRefreshBtn();
     scoreTracker.innerText = `${currentSequence.length}`;
-    footer.removeChild(playBtn);
     footer.append(scoreTracker);
 };
 
@@ -168,11 +171,32 @@ const updateScore = () => {
     scoreTracker.innerText = `${currentSequence.length}`;
 };
 
+const removeScore = () => {
+    footer.removeChild(scoreTracker);
+}
+
+const displayRefreshBtn = () => {
+    // removes 'display: none' from element
+    // refreshBtn.style.removeProperty('display');
+    refreshBtn.style.display = 'block';
+};
+
+const hideRefreshBtn = () => {
+    refreshBtn.style.display = 'none';
+}
+
+const hidePlayBtn = () => {
+    playBtn.style.display = 'none';
+}
+
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = startGame;
 
 const buttons = document.querySelector('.button-container');
 buttons.onclick = pressButton;
+
+const refreshBtn = document.querySelector('.refresh-button');
+refreshBtn.onclick = startGame;
 
 /*
          __                                       __      
