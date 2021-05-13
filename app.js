@@ -82,14 +82,6 @@ const gamePressesBtn = button => {
     }, 500);
 };
 
-const pressButton = e => {
-    const { target } = e;
-    btnEffect(target);
-    addToPlayerSequence(target);
-    checkButtonMatch();
-    playSound(target.id);
-    checkFinishTurn();
-};
 // <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME BUTTON UX
 
 
@@ -107,7 +99,7 @@ refreshBtn.onclick = () => {
     setTimeout(startGame, 200);
 };
 
-const getScore = () => scoreTracker.innerText = `${currentSequence.length - 1}`;
+const getScore = () => scoreTracker.innerText = `${currentSequence.length}`;
 
 
 const displayScore = () => {
@@ -190,6 +182,15 @@ const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
     getScore();
     runSequence();
+};
+
+const pressButton = e => {
+    const { target } = e;
+    btnEffect(target);
+    addToPlayerSequence(target);
+    checkButtonMatch();
+    playSound(target.id);
+    checkFinishTurn();
 };
 
 const startGame = () => {
