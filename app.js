@@ -1,11 +1,11 @@
 /*
 [x] - Play button will initiate game
 [x] - Random color will light up and emit tone.
-[] - Player will press button(s) to match the random sequence.
-[] - After each successfull turn by player, game will add additional random button to sequence and replay entire sequence for the player.
-[] - After game plays the updated sequence, player will attempt to match.
-[] - This process will repeat until player makes a mistake and the game ends.
-[] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
+[x] - Player will press button(s) to match the random sequence.
+[x] - After each successfull turn by player, game will add additional random button to sequence and replay entire sequence for the player.
+[x] - After game plays the updated sequence, player will attempt to match.
+[x] - This process will repeat until player makes a mistake and the game ends.
+[x] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
 [] - Game will keep track of longest sequence and display to player.
 
 */
@@ -77,8 +77,15 @@ const playSound = color => {
     tone.play();
 }
 
+const btnEffect = target => {
+    const colorObj = colors.find( ({ color }) => color === target.id);
+    target.style.backgroundColor = `${colorObj.dynamicColor}`;
+    setTimeout(() => {
+        target.style.backgroundColor = `${colorObj.staticColor}`;
+    }, 500);
+}
+
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
-let currentGame = false;
 let currentSequence = [];
 let playerSequence = [];
 
@@ -103,15 +110,35 @@ const playButton = button => {
 const addToPlayerSequence = button => playerSequence.push(button);
 const clearPlayerSequence = () => playerSequence = [];
 
+const evaluatePlayerFinishTurn = () => {
+    if (playerSequence.length === currentSequence.length) {
+        const match = evaluateIfMatch();
+        if (match) {
+            setTimeout(() => cycleGame(), 1000);
+        } else {
+            gameOver();
+        }
+    } else {
+        return false;
+    }
+}
+
+const evaluateIfMatch = () => {
+    // How to know if two arrays have the same values: https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values
+    for (let i=0; i<playerSequence.length; i++) {
+        if (playerSequence[i] !== currentSequence[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const pressButton = e => {
     const { target } = e;
-    const colorObj = colors.find( ({ color }) => color === target.id);
-    target.style.backgroundColor = `${colorObj.dynamicColor}`;
+    btnEffect(target);
     playSound(target.id);
     addToPlayerSequence(target);
-    setTimeout(() => {
-        target.style.backgroundColor = `${colorObj.staticColor}`;
-    }, 500);
+    evaluatePlayerFinishTurn();
 }
 
 const runSequence = async () => {
@@ -132,25 +159,22 @@ const runSequence = async () => {
     return `For loop completed`;
 }
 
-const matchSequence = async () => {
-
+const cycleGame = () => {
+    extendCurrentSequence(selectRandomBtn());
+    runSequence();
 }
 
-// Async and Await in JavaScript: https://itnext.io/async-and-await-in-javascript-the-extension-to-a-promise-f4e0048964ac
-const playRound = async () => {
-    await runSequence();
-    await matchSequence();
+const gameOver = () => {
+    console.log(`Game Over`);
+    currentSequence = [];
+    clearPlayerSequence();
 }
 
 const playBtn = document.querySelector('.play-button');
-playBtn.onclick = async () => {
-    extendCurrentSequence(selectRandomBtn());
-    const result = runSequence();
-    // console.log(result);
-};
+playBtn.onclick = cycleGame;
 
 const buttons = document.querySelector('.button-container');
-buttons.addEventListener('click', pressButton);
+buttons.onclick = pressButton;
 
 /*
          __                                       __      
