@@ -6,7 +6,8 @@
 [x] - After game plays the updated sequence, player will attempt to match.
 [x] - This process will repeat until player makes a mistake and the game ends.
 [x] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
-[] - Game will keep track of longest sequence and display to player.
+[x] - Display current round while game is being played.
+[] - Game will display 'play again' icon after game over.
 
 UX improvements:
 [x] - Game Over is triggered at wrong button selection.
@@ -14,6 +15,8 @@ UX improvements:
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
+[] - Regular button sounds trigger after game over.
+[] - User cannot select buttons while current sequence is being played.
 */
 
 const greenBtn = document.querySelector('#green');
@@ -130,6 +133,7 @@ const runSequence = () => {
 const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
     console.log(`Current Round: ${currentSequence.length}`);
+    updateScore();
     runSequence();
 };
 
@@ -138,6 +142,7 @@ const startGame = () => {
         currentGame = true;
         extendCurrentSequence(selectRandomBtn());
         console.log(`Current Round: ${currentSequence.length}`);
+        displayScore();
         runSequence();
     }
 };
@@ -149,11 +154,20 @@ const gameOver = () => {
     currentGame = false;
 };
 
+const scoreTracker = document.createElement('p');
+scoreTracker.classList.add('score-tracker');
+const footer = document.querySelector('.footer');
+
 // Score Tracker
-// const scoreTracker = document.createElement('div');
-// scoreTracker.classList.add('score-tracker');
-// const footer = document.querySelector('.footer');
-// footer.append(scoreTracker);
+const displayScore = () => {
+    scoreTracker.innerText = `${currentSequence.length}`;
+    footer.removeChild(playBtn);
+    footer.append(scoreTracker);
+};
+
+const updateScore = () => {
+    scoreTracker.innerText = `${currentSequence.length}`;
+};
 
 const playBtn = document.querySelector('.play-button');
 playBtn.onclick = startGame;
