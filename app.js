@@ -8,6 +8,8 @@
 [x] - When the game ends, the previous sequence will clear. Pressing play will start a new round, with a new button sequence.
 [] - Game will keep track of longest sequence and display to player.
 
+UX improvements:
+[x] - Game Over is triggered at wrong button selection.
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
@@ -82,31 +84,27 @@ const addToPlayerSequence = button => playerSequence.push(button);
 const clearPlayerSequence = () => playerSequence = [];
 
 const evaluatePlayerFinishTurn = () => {
-    if (playerSequence.length === currentSequence.length) {
-        const match = evaluateIfMatch();
-        if (match) {
-            setTimeout(() => cycleGame(), 1000);
-        } else {
+    if (currentGame && (playerSequence.length === currentSequence.length)) {
+        setTimeout(() => cycleGame(), 1000);
+    }
+}
+
+const checkButtonMatch = () => {
+    // How to know if two arrays have the same values: https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values
+    for (let i=0; i<playerSequence.length; i++) {
+        if (playerSequence[i] !== currentSequence[i]) {
             gameOver();
         }
     }
 }
 
-const evaluateIfMatch = () => {
-    // How to know if two arrays have the same values: https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values
-    for (let i=0; i<playerSequence.length; i++) {
-        if (playerSequence[i] !== currentSequence[i]) {
-            return false;
-        }
-    }
-    return true;
-}
 
 const pressButton = e => {
     const { target } = e;
     btnEffect(target);
     playSound(target.id);
     addToPlayerSequence(target);
+    checkButtonMatch();
     evaluatePlayerFinishTurn();
 }
 
