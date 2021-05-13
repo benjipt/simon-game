@@ -10,6 +10,7 @@
 
 UX improvements:
 [x] - Game Over is triggered at wrong button selection.
+[] - gameover-tone played on wrong button selection instead of normal button tone.
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
@@ -44,10 +45,16 @@ const colors = [
 ];
 
 const playSound = color => {
-    const tone = new Audio(`sounds/${color}-button.mp3`);
-    tone.volume = 0.2;
-    tone.play();
-}
+    if (currentGame) {
+        const tone = new Audio(`sounds/${color}-button.mp3`);
+        tone.volume = 0.2;
+        tone.play();
+    } else {
+        const tone = new Audio('sounds/gameover-tone.mp3');
+        tone.volume = 0.6;
+        tone.play();
+    }
+};
 
 const btnEffect = target => {
     const colorObj = colors.find( ({ color }) => color === target.id);
@@ -55,7 +62,7 @@ const btnEffect = target => {
     setTimeout(() => {
         target.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
-}
+};
 
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
@@ -78,7 +85,7 @@ const playButton = button => {
     setTimeout(() => {
         button.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
-}
+};
 
 const addToPlayerSequence = button => playerSequence.push(button);
 const clearPlayerSequence = () => playerSequence = [];
@@ -87,7 +94,7 @@ const evaluatePlayerFinishTurn = () => {
     if (currentGame && (playerSequence.length === currentSequence.length)) {
         setTimeout(() => cycleGame(), 1000);
     }
-}
+};
 
 const checkButtonMatch = () => {
     // How to know if two arrays have the same values: https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values
@@ -96,17 +103,17 @@ const checkButtonMatch = () => {
             gameOver();
         }
     }
-}
+};
 
 
 const pressButton = e => {
     const { target } = e;
     btnEffect(target);
-    playSound(target.id);
     addToPlayerSequence(target);
     checkButtonMatch();
+    playSound(target.id);
     evaluatePlayerFinishTurn();
-}
+};
 
 const runSequence = () => {
     clearPlayerSequence();
@@ -118,7 +125,7 @@ const runSequence = () => {
         }, 700 * i);
         i++;
     }
-}
+};
 
 const cycleGame = () => {
     extendCurrentSequence(selectRandomBtn());
@@ -133,17 +140,12 @@ const startGame = () => {
         console.log(`Current Round: ${currentSequence.length}`);
         runSequence();
     }
-}
+};
 
 const gameOver = () => {
     console.log(`Game Over`);
     currentSequence = [];
     clearPlayerSequence();
-    const tone = new Audio('sounds/gameover-tone.mp3');
-    tone.volume = 0.4;
-    setTimeout(() => {
-        tone.play();
-    }, 600);
     currentGame = false;
 };
 
