@@ -26,7 +26,7 @@ header {
 
 h1 {
     /* font-family: 'Source Code Pro', monospace; */
-    font-size: 84px;
+    font-size: 64px;
     /* font-weight: 600; */
 }
 
@@ -125,7 +125,7 @@ img:hover {
     }
 }
 
-/* For Moto G4 and Galaxy S5 */
+/* For Galaxy S5 */
 @media (max-height: 700px) {
     .button-container {
         height: 480px;
@@ -136,7 +136,7 @@ img:hover {
     }
 }
 
-/* For iPhone 6/7/8 & Galaxy Fold */
+/* For Moto G4, iPhone 6/7/8 & Galaxy Fold */
 @media (max-height: 670px) {
     .button-container {
         height: 460px;
