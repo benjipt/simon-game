@@ -21,13 +21,12 @@ Bugs:
 [] - Sound delay occurs on Safari desktop & mobile Chrome/Safari
 */
 
+// GAME BUTTON UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 const greenBtn = document.querySelector('#green');
 const redBtn = document.querySelector('#red');
 const yellowBtn = document.querySelector('#yellow');
 const blueBtn = document.querySelector('#blue');
 
-
-// GAME BUTTON UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 const colors = [
     {
         color: `green`,
@@ -72,19 +71,14 @@ const btnEffect = button => {
         button.style.backgroundColor = `${colorObj.staticColor}`;
     }, 500);
 };
-
 // <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME BUTTON UX
 
-
-
 // APP BAR UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
-
 const scoreTracker = document.createElement('p');
 scoreTracker.classList.add('score-tracker');
 const footer = document.querySelector('.footer');
 
 const refreshBtn = document.querySelector('.refresh-button');
-const { style } = refreshBtn;
 refreshBtn.onclick = () => {
     animateRefreshBtn();
     setTimeout(startGame, 200);
@@ -106,16 +100,15 @@ const displayRefreshBtn = () => refreshBtn.style.display = 'block';
 const hideRefreshBtn = () => refreshBtn.style.display = 'none';
 
 const animateRefreshBtn = () => {
-    style.transform = `rotate(360deg)`;
-    style.transition = `all 0.2s`;
+    refreshBtn.style.transform = `rotate(360deg)`;
+    refreshBtn.style.transition = `all 0.2s`;
 }
 
 const clearAnimation = () => {
-    style.removeProperty(`transform`);
-    style.removeProperty(`transition`);
+    refreshBtn.style.removeProperty(`transform`);
+    refreshBtn.style.removeProperty(`transition`);
 }
 // <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~APP BAR UX
-
 
 // GAME LOGIC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
 let currentGame = false;
@@ -197,6 +190,8 @@ startBtn.onclick = startGame;
 
 const buttonContainer = document.querySelector('.button-container');
 buttonContainer.onclick = pressButton;
+// <~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GAME LOGIC
+
 /*
          __                                       __      
    __   /\ \                       __  __        /\ \__   
