@@ -50,15 +50,40 @@ const colors = [
     }
 ];
 
+const greenTone = new Audio('sounds/green-button.mp3');
+greenTone.preload = 'auto';
+greenTone.volume = 0.2;
+const redTone = new Audio('sounds/red-button.mp3');
+redTone.preload = 'auto';
+redTone.volume = 0.2;
+const yellowTone = new Audio('sounds/yellow-button.mp3');
+yellowTone.preload = 'auto';
+yellowTone.volume = 0.2;
+const blueTone = new Audio('sounds/blue-button.mp3');
+blueTone.preload = 'auto';
+blueTone.volume = 0.2;
+const gameoverTone = new Audio('sounds/gameover-tone.mp3');
+gameoverTone.preload = 'auto';
+gameoverTone.volume = 0.6;
+
 const playSound = color => {
     if (currentGame) {
-        const tone = new Audio(`sounds/${color}-button.mp3`);
-        tone.volume = 0.2;
-        tone.play();
+        switch (color) {
+            case 'green':
+                greenTone.play();
+                break;
+            case 'red':
+                redTone.play();
+                break;
+            case 'yellow':
+                yellowTone.play()
+                break;
+            case 'blue':
+                blueTone.play();
+                break;
+        }
     } else {
-        const tone = new Audio('sounds/gameover-tone.mp3');
-        tone.volume = 0.6;
-        tone.play();
+        gameoverTone.play()
     }
 };
 
