@@ -27,6 +27,14 @@ const redBtn = document.querySelector('#red');
 const yellowBtn = document.querySelector('#yellow');
 const blueBtn = document.querySelector('#blue');
 
+const audioFiles = {
+  green: new Audio('sounds/green-button.mp3'),
+  red: new Audio('sounds/red-button.mp3'),
+  yellow: new Audio('sounds/yellow-button.mp3'),
+  blue: new Audio('sounds/blue-button.mp3'),
+  gameover: new Audio('sounds/gameover-tone.mp3')
+};
+
 const colors = [
     {
         color: `green`,
@@ -52,11 +60,11 @@ const colors = [
 
 const playSound = color => {
     if (currentGame) {
-        const tone = new Audio(`sounds/${color}-button.mp3`);
+        const tone = audioFiles[color].cloneNode();
         tone.volume = 0.2;
         tone.play();
     } else {
-        const tone = new Audio('sounds/gameover-tone.mp3');
+        const tone = audioFiles.gameover.cloneNode();
         tone.volume = 0.6;
         tone.play();
     }
