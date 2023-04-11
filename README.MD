@@ -23,4 +23,5 @@ Complete
 Play [here](https://wonderful-brahmagupta-3ad87a.netlify.app/)
 
 ## Changelog
+- Prevent button press ux while sequence is running (Apr 11, 2023).
 - Preload audio with Howler.js to fix delay with sound performance (Apr 9, 2023).
