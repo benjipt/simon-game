@@ -15,13 +15,15 @@ UX improvements:
 
 Edge cases:
 [x] - User cannot click play and advance game cycle if current game.
-[] - User cannot select buttons while current sequence is being played.
+[x] - User cannot select buttons while current sequence is being played.
 
 Bugs:
-[] - Sound delay occurs on Safari desktop & mobile Chrome/Safari
+[x] - Sound delay occurs on Safari desktop & mobile Chrome/Safari
 */
 
 // GAME BUTTON UX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+let buttonsEnabled = true;
+
 const greenBtn = document.querySelector('#green');
 const redBtn = document.querySelector('#red');
 const yellowBtn = document.querySelector('#yellow');
@@ -147,6 +149,7 @@ const checkButtonMatch = () => {
 
 const runSequence = () => {
     clearPlayerSequence();
+    buttonsEnabled = false;
     let i = 0;
     for (let button of currentSequence) {
         // Delaying Array Loop Iterations: https://travishorn.com/delaying-foreach-iterations-2ebd4b29ad30
@@ -155,6 +158,9 @@ const runSequence = () => {
         }, 700 * i);
         i++;
     }
+    setTimeout(() => {
+      buttonsEnabled = true;
+    }, 700 * currentSequence.length);
 };
 
 const cycleGame = () => {
@@ -164,6 +170,8 @@ const cycleGame = () => {
 };
 
 const pressButton = e => {
+    if (!buttonsEnabled) return;
+
     const { target } = e;
     addToPlayerSequence(target);
     checkButtonMatch();
